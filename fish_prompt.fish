@@ -250,6 +250,16 @@ else
 end
 
 
+function prompt_arch -d "Display current CPU architecture."
+    switch (uname -m)
+    case arm64
+        prompt_segment white cyan "arm"
+    case x86_64
+        prompt_segment cyan white "x64"
+    end
+end
+
+
 #
 # Prompt
 #
@@ -257,6 +267,7 @@ function fish_prompt
   set -g RETVAL $status
   prompt_status
   prompt_virtual_env
+  prompt_arch
   prompt_user
   prompt_dir
   __exists hg;  and prompt_hg
